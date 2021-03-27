@@ -46,20 +46,21 @@ def output_file(file_path, dict_data):
     except Exception as e:
         print(e)
 
-def dump_tweets(l_tweets, cur_id, dirpath):
-    # every 1K tweets, dump data to json
+def dump_tweets(l_tweets, cur_id, dir_path):
+    # every 100 tweets, dump data to json
     # every 100K tweets, create a new json file
-    n_tweets = 1000  # number tweets per dump
-    n_tweets_file = 100 * n_tweets  # number tweets per json.file
+    n_tweets = 100  # number tweets per dump
+    n_tweets_file = 1000 * n_tweets  # number tweets per json.file
     if l_tweets:
         if cur_id % n_tweets == 0:
             filename = f"HSpam_dataset{cur_id//n_tweets_file}.json"
-            file_path = os.path.join(dirpath, filename)
+            file_path = os.path.join(dir_path, filename)
             output_file(file_path, l_tweets)
             l_tweets = []
     return l_tweets
 
-def run(api, tweets_db, dirpath, cur_id):
+def run(api, tweets_db, dir_path, cur_id):
+    print("Collecting Tweets...")
     l_tweets = []  # store tweets as a list
     for tweet_db in tqdm(tweets_db):
         cur_id += 1
@@ -71,13 +72,14 @@ def run(api, tweets_db, dirpath, cur_id):
         except Exception as e:
             pass
         # split files
-        l_tweets = dump_tweets(l_tweets, cur_id, dirpath)
+        l_tweets = dump_tweets(l_tweets, cur_id, dir_path)
 
 def main():
     api = api_auth()
     dataset_file = "db/Pre_HSpam14_dataset.txt"
-    tweets_db, dirpath, cur_id = parse_file(dataset_file)
-    run(api, tweets_db, dirpath, cur_id)
+    output_dir = "db/tweet/"
+    tweets_db, cur_id = parse_file(dataset_file, output_dir)
+    run(api, tweets_db, output_dir, cur_id)
 
 if __name__ == "__main__":
     main()
