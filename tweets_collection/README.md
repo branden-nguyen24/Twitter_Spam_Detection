@@ -1,7 +1,17 @@
 # Tweet Collection
 
 ## Dataset
+### Original dataset
 [HSpam14 Dataset](https://www3.ntu.edu.sg/home/AXSun/datasets.html)
+    * size: 14 million tweets
+
+### dataset collected 
+[tweet_dataset.csv](https://drive.google.com/drive/u/3/folders/1uSQ58FxUK02vkOo9KkIkW7Qz2WukuLec)
+    * filter original dataset `HSpam14 Dataset`
+    * apply for tweet development account
+    * use twitter API `tweepy` to collect tweets from tweet id in `HSpam14 Dataset`. (Since there is a limit for standard account, only can collect 50K/day)
+    * store data at json files
+    * size(by April 1st, 2021): 210835 tweets
 
 ## Feature Set
 | Feature | Description |
