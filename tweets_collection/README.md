@@ -6,6 +6,7 @@
 ## Feature Set
 | Feature | Description |
 | --- | --- |
+| id | The id of tweet in original dataset |
 | tweet | This is the text that was tweeted |
 | no_followers | The number of followers of this twitter user |
 | no_followings | The number of followings/friends of this twitter user |
@@ -17,4 +18,5 @@
 | no_hashtags | The number of hashtags included in this tweet |
 | no_usermentions | The number of user mentions included in this tweet |
 | no_urls | The number of URLs included in this tweet |
+| label | The class of tweet: Ham(non-spam) - 0, Spam - 1 |
 
