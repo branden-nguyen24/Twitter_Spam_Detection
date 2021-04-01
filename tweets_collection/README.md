@@ -10,8 +10,8 @@
 * Filter original dataset `HSpam14 Dataset`
 * Apply for tweet development account
 * Use twitter API `tweepy` to collect tweets from tweet id in `HSpam14 Dataset`. (Since there is a limit for standard account, only can collect 50K/day)
-* Store data aa json files
-* Size(by April 1st, 2021): 210835 tweets
+* Store data as json files
+* Size: 210,835 tweets (by April 1st, 2021)
 
 ## Feature Set
 | Feature | Description |
