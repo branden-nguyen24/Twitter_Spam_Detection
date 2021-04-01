@@ -11,5 +11,6 @@ def api_auth():
     auth = tweepy.OAuthHandler(api_key, api_key_secret)
     auth.set_access_token(access_token, access_token_secret)
     # To avoid being blocked 
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    # api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    api = tweepy.API(auth)
     return api
