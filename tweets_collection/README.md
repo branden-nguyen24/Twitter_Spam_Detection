@@ -8,7 +8,7 @@
 ### dataset collected 
 [tweet_dataset.csv](https://drive.google.com/drive/u/3/folders/1uSQ58FxUK02vkOo9KkIkW7Qz2WukuLec)
 * Filter original dataset `HSpam14 Dataset`
-* Apply for tweet development account
+* Apply for twitter development account
 * Use twitter API `tweepy` to collect tweets from tweet id in `HSpam14 Dataset`. (Since there is a limit for standard account, only can collect 50K/day)
 * Store data as json files
 * Size: 210,835 tweets (by April 1st, 2021)

@@ -24,13 +24,14 @@ def json_dict(input_file):
 
 def dict_csv(data, output_file):
     cols = data[0].keys()
-    with open(output_file, 'w', newline='')  as f:
+    with open(output_file, 'w', encoding='utf-8', newline='')  as f:
         dict_writer = csv.DictWriter(f, cols)
         dict_writer.writeheader()
         dict_writer.writerows(data)
 
 def combine(input_dir, output_file):
     files = scan_files(input_dir)
+    # print(sorted(files))
     data = []
     print(files)
     for file in files:

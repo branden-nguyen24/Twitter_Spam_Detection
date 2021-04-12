@@ -46,6 +46,15 @@ def output_file(file_path, dict_data):
     except Exception as e:
         print(e)
 
+def file_name(cur_id, n_tweets_file):
+    # file name, e.g. HSpam_dataset_020.json
+    number_str = str(cur_id//n_tweets_file)
+    zero_filled_number = number_str.zfill(3)  # fill string with zeros, e.g 001, 023
+    prefix = "HSpam_dataset_"
+    file_type = ".json"
+    result = prefix + zero_filled_number + file_type
+    return result
+
 def dump_tweets(l_tweets, cur_id, dir_path):
     # every 100 tweets, dump data to json
     # every 100K tweets, create a new json file
@@ -53,7 +62,7 @@ def dump_tweets(l_tweets, cur_id, dir_path):
     n_tweets_file = 1000 * n_tweets  # number tweets per json.file
     if l_tweets:
         if cur_id % n_tweets == 0:
-            filename = f"HSpam_dataset{cur_id//n_tweets_file}.json"
+            filename = file_name(cur_id, n_tweets_file)
             file_path = os.path.join(dir_path, filename)
             output_file(file_path, l_tweets)
             l_tweets = []
