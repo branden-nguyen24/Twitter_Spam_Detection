@@ -55,7 +55,9 @@ def move_column_last_to_first(df):
     # move the last column to the first
     try: 
         cols = df.columns.tolist()
-        update_cols = [cols[-1]].extend(cols[:-1])
+        update_cols = [cols[1]]  # tweet as the first col
+        update_cols.append(cols[-1])  # append tweet_clean as second cols
+        update_cols.extend(cols[2:-1])  # append tweet_clean as second cols
         df = df[update_cols]
     except Exception as e:
         print(e)
