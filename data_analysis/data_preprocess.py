@@ -33,8 +33,8 @@ def run(input_path, output_path):
 
 def output_csv(df, output_path):
     # if file does not exist write header
-    with open(output_path, "w") as f:
-        df.to_csv(f, mode="a", index=False, header=not f.tell(), encoding="utf-8")
+    # with open(output_path, "w") as f:
+    df.to_csv(output_path, index=False, encoding="utf-8")
 
     print(f"File {output_path} outputted")
     print("Finished!!!")
