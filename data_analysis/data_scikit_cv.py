@@ -55,7 +55,7 @@ class ModelsTraining:
         self.df_result = self.accuracy_f1()
 
     def __init_X_y(self, X, y, df, class_name, drop_cols):
-        if df:
+        if df is not None:
             drop_cols = self.__get_drop_cols(drop_cols, class_name)
             X = df.drop(columns=(drop_cols))
             y = df[class_name]
@@ -77,6 +77,8 @@ class ModelsTraining:
 
         # Feature scaling
         sc = StandardScaler()
+        print("=" * 100)
+        print("Transforming and Standardizing data...")
         X_train = sc.fit_transform(X_train)
         X_test = sc.transform(X_test)
 
@@ -100,7 +102,7 @@ class ModelsTraining:
         adaboost = AdaBoostClassifier(n_estimators=100, random_state=0)
         # 7. SVC (Support Vector Machine)
         # SVC is time comsuming
-        # svc = SVC(kernel = 'rbf', max_iter = 1000, probability = True)
+        svc = SVC(kernel = 'rbf', max_iter = 1000, probability = True)
 
         ml_models = {
             "Naive Bayesian": nb,
@@ -143,30 +145,33 @@ class ModelsTraining:
             self.model_ls[name] = model
             self.y_pred_ls[name] = y_pred
 
-            # K-fold Cross Validation
-            if name != "Random Forest Classifier":
-                # cross validation k fold
-                accuracy_scores = cross_val_score(
-                    clf, X_train, y_train, cv=num_folds, scoring="accuracy"
-                )
-                f1_scores = cross_val_score(
-                    clf, X_train, y_train, cv=num_folds, scoring="f1"
-                )
-                print("accuracy_scores:\n", accuracy_scores)
-                print("f1_scores:\n", f1_scores)
-                # mean accuracy and f1-score
-                accuracy_mean = np.mean(accuracy_scores)
-                f1_score_mean = np.mean(f1_scores)
-                print(f"The mean accuracy: {accuracy_mean:.3f}")
-                print(f"The mean f1 score: {f1_score_mean:.3f}")
+            # # K-fold Cross Validation
+            # if name != "Random Forest Classifier":
+            #     # cross validation k fold
+            #     accuracy_scores = cross_val_score(
+            #         clf, X_train, y_train, cv=num_folds, scoring="accuracy"
+            #     )
+            #     f1_scores = cross_val_score(
+            #         clf, X_train, y_train, cv=num_folds, scoring="f1"
+            #     )
+            #     print("accuracy_scores:\n", accuracy_scores)
+            #     print("f1_scores:\n", f1_scores)
+            #     # mean accuracy and f1-score
+            #     accuracy_mean = np.mean(accuracy_scores)
+            #     f1_score_mean = np.mean(f1_scores)
+            #     print(f"The mean accuracy: {accuracy_mean:.3f}")
+            #     print(f"The mean f1 score: {f1_score_mean:.3f}")
 
-            # Random Forest, no k-fold cv needed
-            else:
-                accuracy_mean = accuracy_score(y_test, y_pred)
-                f1_score_mean = f1_score(y_test, y_pred, average="binary")
-                print(f"The accuracy: {accuracy_mean:.3f}")
-                print(f"The f1 score: {f1_score_mean:.3f}")
-
+            # # Random Forest, no k-fold cv needed
+            # else:
+            #     accuracy_mean = accuracy_score(y_test, y_pred)
+            #     f1_score_mean = f1_score(y_test, y_pred, average="binary")
+            #     print(f"The accuracy: {accuracy_mean:.3f}")
+            #     print(f"The f1 score: {f1_score_mean:.3f}")
+            accuracy_mean = accuracy_score(y_test, y_pred)
+            f1_score_mean = f1_score(y_test, y_pred, average="binary")
+            print(f"The accuracy: {accuracy_mean:.3f}")
+            print(f"The f1 score: {f1_score_mean:.3f}")
             self.accuracy_ls[name] = accuracy_mean
             self.f1_score_ls[name] = f1_score_mean
             # print(str(classifier))
